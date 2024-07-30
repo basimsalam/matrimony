@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Error</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <div class="card border-danger mb-3">
+            <div class="card-header bg-danger text-white">
+                <h1>Payment Error</h1>
+            </div>
+            <div class="card-body">
+                <p class="card-text">There was an issue processing your payment for the plan "{{ plan.name }}". Please try again.</p>
+                <p class="card-text">Price: ${{ plan.price }}</p>
+                <p class="card-text">Duration: {{ plan.duration }} days</p>
+                <a href="{% url 'payment/payment' plan_id=plan.id %}" class="btn btn-primary">Try Again</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile View</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .profile-picture {
+            max-width: 150px;
+            max-height: 200px;
+            border-radius: 20%;
+            object-fit: cover;
+        }
+        
+        .edit-button {
+            text-align: right;
+        }
+
+        /* Styling for containers */
+        .section-container {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: #ffffff;
+        }
+        
+    </style>
+</head>
+<body>
+   
+
+    <div class="container mt-5">
+        
+        <div class="card">
+            <div class="card-header">
+                <h1>Profile View and Edit</h1>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-2">
+                        <img src="{{ data.profile_photo.url }}" alt="Profile Picture" class="profile-picture">
+                    </div>
+                    <div class="col-md-10 d-flex align-items-center">
+                        <div class='row'>
+                        <form action="{% url 'app:change_profile'%}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="profile_photo">Change Profile Picture:</label>
+                                <input type="file" class="form-control-file" id="profile_photo" name="profile_photo">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </form>
+                    </div>
+                    <div class='row' >
+                        <h5>Upload Multiple Images and Reels</h5>
+                        <a class="btn btn-primary" href="{% url 'app:upload_files'%}" role="tab" aria-controls="partner-details" aria-selected="false">Upload Images and Reels</a>
+                    </div>
+                    </div>
+                </div>
+                
+                <!-- Basic Details -->
+                <section id="basic-details" class="section-container">
+                    <h2>Basic Details</h2>
+                    <div class="edit-button">
+                        <a href="{% url 'accounts:profile_edit' %}" class="btn btn-primary">Edit Profile</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>First Name: </strong> {{ data.first_name }}</p>
+                            <p><strong>Last Name:</strong> {{ data.last_name }}</p>
+                            <p><strong>Username:</strong> {{ data.username }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Email:</strong> {{ data.email }}</p>
+                            <p><strong>Phone Number:</strong> {{ data.phone_number }}</p>
+                            <p><strong>Date of Birth:</strong> {{ data.date_of_birth }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Additional Details -->
+                <section id="additional-details" class="section-container">
+                    <h2>Additional Details</h2>
+                    <div class="edit-button">
+                        <a href="{% url 'accounts:additional_edit' %}" class="btn btn-primary">Edit Profile</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Hobbies:</strong> {{ data.hobbies }}</p>
+                            <p><strong>Gender:</strong> {{ data.gender }}</p>
+                            <p><strong>Interest:</strong> {{ data.interest }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Smoking Habits:</strong> {{ data.smoking_habits }}</p>
+                            <p><strong>Drinking Habits:</strong> {{ data.drinking_habits }}</p>
+                            <p><strong>Qualification:</strong> {{ data.qualification }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Address Details -->
+                <section id="address-details" class="section-container">
+                    <h2>Address Details</h2>
+                    <div class="edit-button">
+                        <a href="{% url 'accounts:address_edit' %}" class="btn btn-primary">Edit Profile</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Address Line1:</strong>{{ address.address_line1 }}</p>
+                            <p><strong>Address Line2:</strong> {{ address.address_line2 }}</p>
+                            <p><strong>City:</strong> {{ address.city }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>State:</strong> {{ address.state }}</p>
+                            <p><strong>Zip Code:</strong> {{ address.zipcode }}</p>
+                            <p><strong>Country:</strong> {{ address.country }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Employment Details -->
+                <section id="employment-details" class="section-container">
+                    <h2>Employment Details</h2>
+                    <div class="edit-button">
+                        <a href="{% url 'accounts:employ_edit' %}" class="btn btn-primary">Edit Profile</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Job Status:</strong> {{ data.job_status }}</p>
+                            <p><strong>Company Name:</strong> {{ data.company_name }}</p>
+                            <p><strong>Job Title:</strong> {{ data.job_title }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Designation:</strong> {{ data.designation }}</p>
+                            <p><strong>Company Location:</strong> {{ data.company_location }}</p>
+                            <p><strong>Expertise Level:</strong> {{ data.expertise_level }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Family Details -->
+                <section id="family-details" class="section-container">
+                    <h2>Family Details</h2>
+                    <div class="edit-button">
+                        <a href="" class="btn btn-primary">Edit Profile</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Father's Name:</strong> {{ family.father_name }}</p>
+                            <p><strong>Father's Occupation:</strong> {{ family.father_occupation }}</p>
+                            <p><strong>Siblings:</strong> {{ family.num_of_siblings }}</p>
+                            <p><strong>Religion:</strong> {{ family.religion }}</p>
+                            <p><strong>Caste:</strong> {{ family.caste }}</p>
+                            <p><strong>Family Type:</strong> {{ family.family_type }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Mother's Name:</strong> {{ family.mother_name }}</p>
+                            <p><strong>Mother's Occupation:</strong> {{ family.mother_occupation }}</p>
+                            <p><strong>Marital Status:</strong> {{ family.marital_status }}</p>
+                            <p><strong>Family Values:</strong> {{ family.family_values }}</p>
+                            <p><strong>Disability:</strong> {{ family.disability }}</p>
+                            <p><strong>Family Class:</strong> {{ family.family_class }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Partner Preferences -->
+                <section id="partner-preferences" class="section-container">
+                    <h2>Partner Preferences</h2>
+                    <div class="edit-button">
+                        <a href="" class="btn btn-primary">Edit Profile</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Your Height:</strong> {{ partner.height }}</p>
+                            <p><strong>Your Income:</strong> {{ partner.income }}</p>
+                            <hr>
+                            <p><strong>Min Height(in cm):</strong> {{ partner.from_height }}</p>
+                            <p><strong>Min Weight:</strong> {{ partner.from_weight }}</p>
+                            <p><strong>Min Age:</strong> {{ partner.from_age }}</p>
+                            <p><strong>Min Income:</strong> {{ partner.min_income }}</p>
+                            <p><strong>Religion:</strong> {{ partner.religion }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Your Weight:</strong> {{ partner.weight }}</p>
+                            <p><strong>Horoscope:</strong> {{ partner.horoscope }}</p>
+                            <hr>
+                            <p><strong>Max Height(in cm):</strong> {{ partner.to_height }}</p>
+                            <p><strong>Max Weight:</strong> {{ partner.to_weight }}</p>
+                            <p><strong>Max Age:</strong> {{ partner.to_age }}</p>
+                            <p><strong>Max Income:</strong> {{ partner.max_income }}</p>
+                            <p><strong>Caste:</strong> {{ partner.caste }}</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock content %}

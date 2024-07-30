@@ -1,0 +1,112 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Additional Details and Partner Preferences</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .container-box {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .form-container {
+            box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5 container-box">
+        <div class="form-container">
+            <h2 class="mb-4">Additional Details</h2>
+            <form method="POST" action="{% url 'app:partner' %}">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {% include 'components/form_field.html' with field=form.height %}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {% include 'components/form_field.html' with field=form.weight %}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {% include 'components/form_field.html' with field=form.income %}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {% include 'components/form_field.html' with field=form.horoscope %}
+                    </div>
+                </div>
+
+                <h2 class="mb-4 mt-5">Partner Preferences</h2>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {% include 'components/form_field.html' with field=form.from_height %}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {% include 'components/form_field.html' with field=form.to_height %}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {% include 'components/form_field.html' with field=form.from_age %}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {% include 'components/form_field.html' with field=form.to_age %}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {% include 'components/form_field.html' with field=form.from_weight %}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {% include 'components/form_field.html' with field=form.to_weight %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {% include 'components/form_field.html' with field=form.caste %}
+                </div>
+                <div class="form-group">
+                    {% include 'components/form_field.html' with field=form.religion %}
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {% include 'components/form_field.html' with field=form.min_income %}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {% include 'components/form_field.html' with field=form.max_income %}
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#caste').select2({
+                placeholder: "Select Caste"
+            });
+            $('#religion').select2({
+                placeholder: "Select Religion"
+            });
+        });
+    </script>
+</body>
+</html>
+{% endblock content %}

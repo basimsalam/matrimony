@@ -1,0 +1,95 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Type Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">User Information</h2>
+        <form method="post" action="{% url "accounts:employment_details"%}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="userType"></label>
+                {% include 'components/form_field.html' with field=form.job_status %}
+            </div>
+
+            <!-- Employee/Employer Section -->
+            <div id="employeeEmployerFields" class="hidden">
+                <div class="form-group">
+                    <label for="companyName"></label>
+                    {% include 'components/form_field.html' with field=form.company_name %}
+                </div>
+                <div class="form-group">
+                    <label for="designation"></label>
+                    {% include 'components/form_field.html' with field=form.designation %}
+                </div>
+                <div class="form-group">
+                    <label for="companyLocation"> </label>
+                    {% include 'components/form_field.html' with field=form.company_location %}
+                </div>
+            </div>
+
+            <!-- Job Seeker Section -->
+            <div id="jobSeekerFields" class="hidden">
+                <div class="form-group">
+                    <label for="jobTitle"></label>
+                    {% include 'components/form_field.html' with field=form.job_title%}
+                </div>
+                <div class="form-group">
+                    <label for="expertiseLevel"></label>
+                    {% include 'components/form_field.html' with field=form.expertise_level  %}
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">
+                    Continue <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var userTypeField = document.getElementById('id_job_status');
+            var employeeEmployerFields = document.getElementById('employeeEmployerFields');
+            var jobSeekerFields = document.getElementById('jobSeekerFields');
+
+            function showRelevantFields() {
+                var userType = userTypeField.value;
+
+                if (userType === 'Employee' || userType === 'Employer') {
+                    employeeEmployerFields.classList.remove('hidden');
+                    jobSeekerFields.classList.add('hidden');
+                } else if (userType === 'JobSeeker') {
+                    employeeEmployerFields.classList.add('hidden');
+                    jobSeekerFields.classList.remove('hidden');
+                } else {
+                    employeeEmployerFields.classList.add('hidden');
+                    jobSeekerFields.classList.add('hidden');
+                }
+            }
+
+            userTypeField.addEventListener('change', showRelevantFields);
+            showRelevantFields(); // Initial call to set the correct fields based on the current value
+        });
+    </script>
+</body>
+</html>
+{% endblock content %}

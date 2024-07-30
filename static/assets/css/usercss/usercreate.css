@@ -1,0 +1,118 @@
+/* Container Styles */
+.container {
+     width: 100%;
+    max-width: 1000px; 
+     margin: 0 auto; 
+     padding: 0px; 
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Fieldset and Legend Styles */
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+legend {
+    padding: 0 10px;
+    font-weight: bold;
+    color: #444;
+}
+
+/* Form Group Styles */
+.form-group {
+    display: inline-flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    padding-left: 20px;
+}
+.form-group11{
+    display: list-item;
+    flex-direction: column;
+    margin-bottom: 15px;
+    padding-left: 20px;
+}
+radio-group:hower{
+    background-color: #e01818;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="file"],
+textarea,
+select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+input[type="file"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.radio-group,
+.income-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.radio-group label,
+.income-group label {
+    margin-right: 10px;
+}
+
+.radio-group input,
+.income-group select {
+    margin-right: 5px;
+}
+
+/* Button Styles */
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+

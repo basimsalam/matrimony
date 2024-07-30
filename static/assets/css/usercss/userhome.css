@@ -1,0 +1,41 @@
+/* Resetting default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Basic styling for the header */
+  header {
+    background-color: #f0f0f0;
+    padding: 20px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  .navbar-logo img {
+    height: 50px; /* Adjust the height as needed */
+  }
+  
+  .navbar-links {
+    text-align: center;
+  }
+  
+  .navbar-links a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+  }
+  
+  .navbar-links a:hover,
+  .navbar-links a.active {
+    background-color: #ddd;
+  }
+  

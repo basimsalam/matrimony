@@ -1,0 +1,132 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .notification {
+            background-color: #d3d3d3;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .notification .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+        .notification .icon img {
+            width: 100%;
+            height: auto;
+        }
+        .notification-content {
+            flex-grow: 1;
+        }
+        .notification-time {
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3>Notifications <span class="badge badge-primary">3</span></h3>
+            <a href="#" class="text-primary">Mark all as read</a>
+        </div>
+        <div class="notification">
+            <div class="d-flex align-items-center">
+                <div class="icon">
+                    <img src="https://via.placeholder.com/50" alt="User Icon">
+                </div>
+                <div class="notification-content">
+                    <strong>Mark Webber</strong> reacted to your recent post <strong>My first tournament today!</strong>
+                    <div class="notification-time">1m ago</div>
+                </div>
+            </div>
+        </div>
+        <div class="notification">
+            <div class="d-flex align-items-center">
+                <div class="icon">
+                    <img src="https://via.placeholder.com/50" alt="User Icon">
+                </div>
+                <div class="notification-content">
+                    <strong>Angela Gray</strong> followed you
+                    <div class="notification-time">5m ago</div>
+                </div>
+            </div>
+        </div>
+        <div class="notification">
+            <div class="d-flex align-items-center">
+                <div class="icon">
+                    <img src="https://via.placeholder.com/50" alt="User Icon">
+                </div>
+                <div class="notification-content">
+                    <strong>Jacob Thompson</strong> has joined your group <strong>Chess Club</strong>
+                    <div class="notification-time">1 day ago</div>
+                </div>
+            </div>
+        </div>
+        <div class="notification">
+            <div class="d-flex align-items-center">
+                <div class="icon">
+                    <img src="https://via.placeholder.com/50" alt="User Icon">
+                </div>
+                <div class="notification-content">
+                    <p><strong>Rizky Hasanuddin</strong> sent you a private message</p>
+                    <p>Hello, thanks for setting up the Chess Club. I've been a member for a few weeks now and I'm already having lots of fun and improving my game.</p>
+                    <div class="notification-time">5 days ago</div>
+                </div>
+            </div>
+        </div>
+        <div class="notification">
+            <div class="d-flex align-items-center">
+                <div class="icon">
+                    <img src="https://via.placeholder.com/50" alt="User Icon">
+                </div>
+                <div class="notification-content">
+                    <strong>Kimberly Smith</strong> commented on your picture
+                    <div class="notification-time">1 week ago</div>
+                </div>
+            </div>
+        </div>
+        <div class="notification">
+            <div class="d-flex align-items-center">
+                <div class="icon">
+                    <img src="https://via.placeholder.com/50" alt="User Icon">
+                </div>
+                <div class="notification-content">
+                    <strong>Nathan Peterson</strong> reacted to your recent post <strong>5 end-game strategies to increase your win rate</strong>
+                    <div class="notification-time">2 weeks ago</div>
+                </div>
+            </div>
+        </div>
+        <div class="notification">
+            <div class="d-flex align-items-center">
+                <div class="icon">
+                    <img src="https://via.placeholder.com/50" alt="User Icon">
+                </div>
+                <div class="notification-content">
+                    <strong>Anna Kim</strong> left the group <strong>Chess Club</strong>
+                    <div class="notification-time">2 weeks ago</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock content %}

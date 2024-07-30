@@ -1,0 +1,83 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Plans</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .pricing-container {
+            padding: 40px;
+            background-color: #f8f9fa;
+            
+        }
+        .pricing-table {
+            text-align: center;
+        }
+        .pricing-table h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        .card {
+
+            margin-top:20px
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            background-color: #f1f1f1;
+        }
+        .card-header {
+            border-bottom: none;
+            font-size: 1.5rem;
+            padding: 1.5rem 1rem;
+            
+        }
+        .card-body {
+            padding: 2rem 1rem;
+        }
+        .btn-primary, .btn-light {
+            border-radius: 20px;
+            padding: 10px 20px;
+        }
+        .card-feature {
+            margin: 10px 0;
+        }
+        .highlight {
+            background-color: #6c63ff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container pricing-container">
+        <div class="pricing-table">
+            <h1>Our Pricing</h1>
+            
+            <div class="row">
+                {% for plan in plans %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card {% if plan.highlight %}highlight{% endif %}">
+                            <div class="card-header {{ plan.highlight|yesno:'text-white,bg-light' }}">
+                                <h5 class="card-title">{{ plan.name }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">${{ plan.price }}</h3>
+                                <p class="card-feature">{{ plan.duration }} Days</p>
+                                <a href="{% url 'payment:payment' plan.id %}" class="btn {% if plan.highlight %}btn-light{% else %}btn-primary{% endif %}">Pay Now</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

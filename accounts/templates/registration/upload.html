@@ -1,0 +1,45 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+<html>
+<head>
+    <title>Upload Images and Reels</title>
+</head>
+<body>
+    <div class="container mt-5">
+    <h2>Upload Images and Reels</h2>
+    <form action="{% url 'app:upload_files' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="images">Select Images:</label>
+        <input type="file" id="images" name="images" multiple accept="image/*"><br><br>
+        
+        <label for="reels">Select Reels:</label>
+        <input type="file" id="reels" name="reels" multiple accept="video/*"><br><br>
+        
+        <input type="submit" value="Upload">
+    </form>
+    <h3>Uploaded Images</h3>
+    <div class="row">
+        {% for image in images %}
+            <div class="col-md-3">
+                <img src="{{ image.file.url }}" class="img-fluid" alt="Uploaded Image">
+            </div>
+        {% endfor %}
+    </div>
+
+    <h3>Uploaded Reels</h3>
+    <div class="row">
+        {% for reel in reels %}
+            <div class="col-md-3">
+                <video controls class="img-fluid">
+                    <source src="{{ reel.file.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,156 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrimony Profiles</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .container-box {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            position: relative; /* Ensure relative positioning for absolute elements */
+        }
+        .profile-card {
+            margin-bottom: 20px;
+        }
+        .profile-card img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        .card-body {
+            height: 200px;
+        }
+        .view-all-btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        /* Styling for headings */
+        .container-box h2 {
+            font-style: italic;
+            font-weight: bold;
+            text-align:center;
+        }
+
+        /* Hover effect for cards */
+        .card {
+            transition: transform 0.4s ease, box-shadow 0.5s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05); /* Increase the size a bit on hover */
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+            z-index: 1; /* Ensure it overlaps neighboring cards */
+        }
+
+        /* Initially hide profiles beyond a certain number */
+        .profile-card.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Section: Matches for You -->
+        <div class="container-box">
+            <h2 class="mb-4">Matches for You</h2>
+            <div class="row" id="matches-for-you">
+                {% for p in profiles %}
+                <div class="col-lg-3 col-md-6 profile-card {% if forloop.counter > 4 %}hidden{% endif %}">
+                    <div class="card profile-card text-white bg-dark mb-3">
+                        {% if p.profile_photo %}
+                        <img src="{{ p.profile_photo.url }}" class="card-img-top" alt="{{ p.username }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ p.first_name }} {{ p.last_name }}</h5>
+                            <p class="card-text">Age: {{ p.age }}</p>
+                            <p class="card-text">Location: {{ p.address.first.state }}</p>
+                            <a href="{% url 'app:detailed_profile' p.id %}" class="btn btn-primary">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="view-all-btn-container">
+                <a href="#" class="view-all-btn btn btn-outline-primary" onclick="showAllProfiles('matches-for-you')"><i class="fas fa-arrow-right"></i> View All</a>
+            </div>
+        </div>
+
+        <!-- Section: Featured Profiles -->
+        <div class="container-box">
+            <h2 class="mb-4">Featured Profiles</h2>
+            <div class="row" id="featured-profiles">
+                {% for p in profiles %}
+                <div class="col-lg-3 col-md-6 profile-card {% if forloop.counter > 4 %}hidden{% endif %}">
+                    <div class="card profile-card text-white bg-dark mb-3">
+                        {% if p.profile_photo %}
+                        <img src="{{ p.profile_photo.url }}" class="card-img-top" alt="{{ p.username }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ p.first_name }} {{ p.last_name }}</h5>
+                            <p class="card-text">Age: {{ p.age }}</p>
+                            <p class="card-text">Location: {{ p.address.first.state }}</p>
+                            <a href="{% url 'app:detailed_profile' p.id %}" class="btn btn-primary">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="view-all-btn-container">
+                <a href="#" class="view-all-btn btn btn-outline-primary" onclick="showAllProfiles('featured-profiles')"><i class="fas fa-arrow-right"></i> View All</a>
+            </div>
+        </div>
+
+        <!-- Section: Location Matches -->
+        <div class="container-box">
+            <h2 class="mb-4">Location Matches</h2>
+            <div class="row" id="location-matches">
+                {% for p in profiles %}
+                <div class="col-lg-3 col-md-6 profile-card {% if forloop.counter > 4 %}hidden{% endif %}">
+                    <div class="card profile-card text-white bg-dark mb-3">
+                        {% if p.profile_photo %}
+                        <img src="{{ p.profile_photo.url }}" class="card-img-top" alt="{{ p.username }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ p.first_name }} {{ p.last_name }}</h5>
+                            <p class="card-text">Age: {{ p.age }}</p>
+                            <p class="card-text">Location: {{ p.address.first.state }}</p>
+                            <a href="{% url 'app:detailed_profile' p.id %}" class="btn btn-primary">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="view-all-btn-container">
+                <a href="#" class="view-all-btn btn btn-outline-primary" onclick="showAllProfiles('location-matches')"><i class="fas fa-arrow-right"></i> View All</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function showAllProfiles(containerId) {
+            var container = document.getElementById(containerId);
+            var hiddenProfiles = container.querySelectorAll('.profile-card.hidden');
+            hiddenProfiles.forEach(function(profile) {
+                profile.classList.remove('hidden');
+            });
+            // Hide the "View All" button
+            container.nextElementSibling.querySelector('.view-all-btn').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+{% endblock content %}

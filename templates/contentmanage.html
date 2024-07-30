@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/dashimg/apple-icon.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'assets/img/dashimg/favicon.png' %}">
+  <title>
+    Content Management Page
+  </title>
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <link href="{% static 'assets/css/nucleo-icons.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/css/nucleo-svg.css' %}" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="{% static 'assets/css/dashcss/nucleo-svg.css' %}" rel="stylesheet" />
+  <link id="pagestyle" href="{% static 'assets/css/dashcss/argon-dashboard.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/css/content-management.css' %}" rel="stylesheet" />
+</head>
+
+<body class="g-sidenav-show bg-gray-100">
+  {% include 'sidenav.html' %}
+
+  <div class="container-fluid py-4">
+    <div class="content-section">
+      <h2>Change Banner</h2>
+      <input type="file" id="banner-upload" accept="image/*">
+      <div id="banner-display" style="margin-top: 20px;">
+        <!-- Uploaded banner will be displayed here -->
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>Change Theme</h2>
+      <div class="theme-selector">
+        <button class="theme-button light-theme" onclick="changeTheme('light')">Light Theme</button>
+        <button class="theme-button dark-theme" onclick="changeTheme('dark')">Dark Theme</button>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>About Company</h2>
+      <textarea id="about-company" rows="4" style="width: 100%;" placeholder="Write about your company here.."></textarea>
+    </div>
+
+    <div class="content-section">
+      <h2>Contact Details</h2>
+      <form id="contact-details-form">
+        <div class="form-group">
+          <label for="address1">Address 1</label>
+          <input type="text" id="address1" class="form-control" placeholder="Address1">
+        </div>
+        <div class="form-group">
+         
+          <input type="text" id="address2" class="form-control" placeholder="Address2">
+        </div>
+        <div class="form-group">
+          
+          <input type="tel" id="phone1" class="form-control" placeholder="Phone Number 1">
+        </div>
+        <div class="form-group">
+          
+          <input type="tel" id="phone2" class="form-control" placeholder="Phone Number 2">
+        </div>
+        <div class="form-group">
+          
+          <input type="email" id="email" class="form-control" placeholder="Email">
+        </div>
+        <div class="form-group">
+          
+          <input type="url" id="instagram" class="form-control" placeholder="Instagram">
+        </div>
+        <div class="form-group">
+         
+          <input type="url" id="linkedin" class="form-control" placeholder="LinkedIn">
+        </div>
+      </form>
+    </div>
+
+    <div class="content-section">
+      <h2>Help / FAQ</h2>
+      <textarea id="help-faq" rows="4" style="width: 100%;"></textarea>
+    </div>
+  </div>
+
+  <script>
+    function changeTheme(theme) {
+      if (theme === 'light') {
+        document.body.classList.remove('dark-theme');
+        document.body.classList.add('light-theme');
+      } else if (theme === 'dark') {
+        document.body.classList.remove('light-theme');
+        document.body.classList.add('dark-theme');
+      }
+    }
+
+    document.getElementById('banner-upload').addEventListener('change', function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.style.maxWidth = '100%';
+          img.style.height = 'auto';
+          document.getElementById('banner-display').innerHTML = '';
+          document.getElementById('banner-display').appendChild(img);
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+</html>
