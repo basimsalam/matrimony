@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+}
+
+.container-box {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    position: relative; 
+    margin-right: 10px;
+    /* Ensure relative positioning for absolute elements */
+}
+.match{
+    padding-bottom: 20px;
+}
+.profile-card {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    
+    
+}
+.profile-card img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.card-body {
+    height: 150px;
+    text-decoration: none;
+}
+.view-all-btn-container {
+    text-align: center;
+    margin-top: 20px;
+}
+/* Styling for headings */
+.container-box h2 {
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Hover effect for cards */
+.card {
+    transition: transform 0.4s ease, box-shadow 0.5s ease;
+}
+
+.card:hover {
+    transform: scale(1.05); /* Increase the size a bit on hover */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+    z-index: 1; /* Ensure it overlaps neighboring cards */
+}
+
+/* Initially hide profiles beyond a certain number */
+.profile-card.hidden {
+    display: none;
+}

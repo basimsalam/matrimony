@@ -1,137 +1,82 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar with Styled Buttons</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
-    <style>
-        .navbar {
-            min-height: 70px; /* Adjust the height as per your preference */
-        }
-
-        .navbar-brand,
-        .nav-link {
-            font-size: 17px; /* Adjust the font size as per your preference */
-            padding-left: 0px;
-            margin-left: 0px;
-        }
-
-        .navbar-nav .nav-item {
-            position: relative;
-            margin-right: 20px;
-        }
-
-        .navbar-nav .nav-link {
-            color: white;
-            padding: 10px 20px;
-            transition: all 0.3s;
-        }
-
-        .navbar-nav .nav-link::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background-color: transparent;
-            transition: background-color 0.3s;
-        }
-
-        .navbar-nav .nav-link:hover::before,
-        .navbar-nav .nav-link.active::before {
-            background-color: white;
-        }
-
-        .navbar-nav .nav-link:hover,
-        .navbar-nav .nav-link.active {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-        }
-
-        .premium-icon {
-            margin-left: 10px;
-            color: gold; /* Adjust color as needed */
-            font-size: 1.2rem;
-        }
-       .try-premium-link {
-            font-size: 14px; /* Reduce the font size for the Try Premium link */
-        } 
-    </style>
+    <link rel="stylesheet" href="{% static 'assets/css/navbar.css' %}">
 </head>
 <body>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand text-light" href="{% url 'app:list_profiles' %}">Matrimony</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+    <a class="navbar-brand text-light" href="{% url 'app:list_profiles' %}">Matrimony</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
             data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
             aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavId">
-            <ul class="navbar-nav mx-auto">
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link text-light {% if request.resolver_match.url_name == 'list_profiles' %}active{% endif %}" href="{% url 'app:list_profiles' %}">Matches</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light {% if request.resolver_match.url_name == 'messaging_page' %}active{% endif %}" href="{% url 'app:messaging_page' 1 %}">Messages</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light {% if request.resolver_match.url_name == 'favorite_profiles' %}active{% endif %}" href="{% url 'app:favorite_profiles' %}">Favorites</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light {% if request.resolver_match.url_name == 'received_requests' %}active{% endif %}" href="{% url 'app:received_requests' %}">Requests</a>
-                </li>
-                {% endif %}
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavId">
+        <ul class="navbar-nav mx-auto d-flex justify-content-center">
+            {% if user.is_authenticated %}
+            <li class="nav-item mx-2">
+                <a class="nav-link text-light {% if request.resolver_match.url_name == 'list_profiles' %}active{% endif %}" href="{% url 'app:list_profiles' %}">Matches</a>
+            </li>
+            <li class="nav-item mx-2">
+                <a class="nav-link text-light {% if request.resolver_match.url_name == 'messaging_page' %}active{% endif %}" href="{% url 'app:messaging_page' 1 %}">Messages</a>
+            </li>
+            <li class="nav-item mx-2">
+                <a class="nav-link text-light {% if request.resolver_match.url_name == 'favorite_profiles' %}active{% endif %}" href="{% url 'app:favorite_profiles' %}">Favorites</a>
+            </li>
+            <li class="nav-item mx-2">
+                <a class="nav-link text-light {% if request.resolver_match.url_name == 'received_requests' %}active{% endif %}" href="{% url 'app:received_requests' %}">Requests</a>
+            </li>
+            {% endif %}
 
-                {% if not user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link text-light {% if request.resolver_match.url_name == '' %}active{% endif %}" href="">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light {% if request.resolver_match.url_name == '' %}active{% endif %}" href="">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light {% if request.resolver_match.url_name == 'login' %}active{% endif %}" href="{% url 'accounts:login' %}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light {% if request.resolver_match.url_name == 'register' %}active{% endif %}" href="{% url 'accounts:register' %}">Register</a>
-                </li>
-                {% endif %}
-            </ul>
+            {% if not user.is_authenticated %}
+            <li class="nav-item mx-2">
+                <a class="nav-link text-light {% if request.resolver_match.url_name == '' %}active{% endif %}" href="#">Home</a>
+            </li>
+            <li class="nav-item mx-2">
+                <a class="nav-link text-light {% if request.resolver_match.url_name == '' %}active{% endif %}" href="#">Contact</a>
+            </li>
+            <li class="nav-item mx-2">
+                <a class="nav-link text-light {% if request.resolver_match.url_name == 'login' %}active{% endif %}" href="{% url 'accounts:login' %}">Login</a>
+            </li>
+            <li class="nav-item mx-2">
+                <a class="nav-link text-light {% if request.resolver_match.url_name == 'register' %}active{% endif %}" href="{% url 'accounts:register' %}">Register</a>
+            </li>
+            {% endif %}
+        </ul>
 
-            <ul class="navbar-nav ms-auto">
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link text-light {% if request.resolver_match.url_name == 'notification' %}active{% endif %}" href="{% url 'app:notification' %}" role="button" aria-expanded="false">
-                        <i class="fas fa-bell"></i> 
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light {% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user"></i> 
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">Profile</a></li>
-                        <li><a class="dropdown-item" href="{% url 'accounts:change_password' %}">Change Password</a></li>
-                        <li><a class="dropdown-item" href="{% url 'accounts:delete_account' %}">Delete Account</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{% url 'payment:plan_list' %}">Try Premium
-                        </a></a></li>
-                        <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light try-premium-link" href="{% url 'payment:plan_list' %}">
-                        <i class="fas fa-star premium-icon"></i> Try Premium
-                    </a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
+        <ul class="navbar-nav ms-auto">
+            {% if user.is_authenticated %}
+            <li class="nav-item mx-2">
+                <a class="nav-link text-light {% if request.resolver_match.url_name == 'notification' %}active{% endif %}" href="{% url 'app:notification' %}" role="button" aria-expanded="false">
+                    <i class="fas fa-bell"></i>
+                </a>
+            </li>
+            <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle text-light {% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">Profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'accounts:change_password' %}">Change Password</a></li>
+                    <li><a class="dropdown-item" href="{% url 'accounts:delete_account' %}">Delete Account</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'payment:plan_list' %}">Try Premium</a></a></li>
+                    <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a></li>
+                </ul>
+            </li>
+            <li class="nav-item mx-2">
+                <a class="nav-link text-light try-premium-link" href="{% url 'payment:plan_list' %}">
+                    <i class="fas fa-star premium-icon"></i> Try Premium
+                </a>
+            </li>
+            {% endif %}
+        </ul>
     </div>
 </nav>
 

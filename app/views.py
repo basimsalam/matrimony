@@ -144,11 +144,31 @@ class ProfileListView(LoginRequiredMixin, ListView):
         preference = get_object_or_404(Partner,user=self.request.user)
         
         
+        
         queryset = queryset.exclude(id=user.id).exclude(is_staff = True)
         queryset = queryset.select_related('family', 'partner').prefetch_related('address').all()
         
         
         return queryset
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+
+        
+        matches_for_you = self.get_queryset()
+
+        featured_profiles = User.objects.filter(usersubscription__active=True).exclude(id=user.id)
+
+        
+        # location_matches = User.objects.filter(address__country=user.address.country).exclude(id=user.id)
+
+        context['matches_for_you'] = matches_for_you
+        context['featured_profiles'] = featured_profiles
+        # context['location_matches'] = location_matches
+
+        return context
 
 
 

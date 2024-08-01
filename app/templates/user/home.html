@@ -1,6 +1,102 @@
-{% extends 'shared/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'assets/css/home.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <p class="logo">Matrimony</p>
+                <div class="login_buttons">
+                    <a href="{% url 'accounts:login' %}" class="button">Login</a>
+                    <a href="{% url 'accounts:register' %}" class="button">SignUp</a>
+                </div>
+            </div>
+            <div class="banner">
+                <h1>Welcome to Matrimony</h1>
+                <p>Your perfect match is just a click away</p>
+            </div>
+            <div class="features">
+                <h2>Why choose Matrimony?</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <img src="{% static 'assets/img/userimg/trust.jpg' %}" alt="Trusted" class="feature-icon">
+                        <h3>Trusted By Millions Of Members</h3>
+                    </div>
+                    <div class="feature-item">
+                        <img src="{% static 'assets/img/userimg/security.jpg' %}" alt="Privacy" class="feature-icon">
+                        <h3>Enhanced Privacy Settings</h3>
+                    </div>
+                    <div class="feature-item">
+                        <img src="{% static 'assets/img/userimg/intelligence.jpg' %}" alt="Matchmaking" class="feature-icon">
+                        <h3>Intelligent Matchmaking System</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="about">
+                <div class="about-text">
+                    <h2>The perfect matrimonial site for a perfect match</h2>
+                    <p>Welcome to Matrimony where your journey towards finding the perfect partner begins. We understand that finding a life partner is one of the most important decisions you'll ever make, and we're here to make that process as smooth and enjoyable as possible.</p>
+                    <p><strong>Millions of families have found each other on Matrimony. Find yours.</strong></p>
+                    <button class="register-button">REGISTER FREE NOW</button>
+                </div>
+                <div class="about-image">
+                    <img src="{% static 'assets/img/userimg/marriage1.jpg' %}" alt="Happy Family">
+                </div>
+            </div>
 
-{% block content %}
-    
-{% endblock content %}
-    
+            <div class="success-stories">
+                <h2>Matrimony Service with Millions of Success Stories</h2>
+                <div class="success-stories-grid">
+                    <div class="success-story-item">
+                        <img src="{% static 'assets/img/userimg/cple1.jpg' %}" alt="Poonam & Anand" class="story-image">
+                        <h3>Poonam & Anand</h3>
+                        <p>We met on Matrimony and absolutely amazing thoughts matched and we moved forward. In spite of having kids both sides it was looks difficult but the platform provides...</p>
+                    </div>
+                    <div class="success-story-item">
+                        <img src="{% static 'assets/img/userimg/cple2.jpg' %}" alt="Avani & Prakhar" class="story-image">
+                        <h3>Avani & Prakhar</h3>
+                        <p>We met on Matrimony and started texting to get deal breaker things clear first. Gradually we shifted to the phone and found out we have more common interests than not. I like his...</p>
+                    </div>
+                    <div class="success-story-item">
+                        <img src="{% static 'assets/img/userimg/cpl3.jpg' %}" alt="Avani & Prakhar" class="story-image">
+                        <h3>Avani & Prakhar</h3>
+                        <p>We met on Matrimonyi and started texting to get deal breaker things clear first. Gradually we shifted to the phone and found out we have more common interests than not. I like his...</p>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="footer-content">
+                    
+                    <div class="footer-section links">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section contact">
+                        <h3>Contact Us</h3>
+                        <p>Email: support@matrimony.com</p>
+                        <p>Phone: +123 456 7890</p>
+                        <p>Address: 123 Matrimony St, Love City, LC 12345</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 Matrimony | Designed by YourName</p>
+                </div>
+            </footer>
+
+        </div>
+        <script src="" async defer></script>
+    </body>
+</html>
