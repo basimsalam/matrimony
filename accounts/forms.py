@@ -16,10 +16,12 @@ class LoginForm(Form):
     username = CharField(
         min_length=4,
         max_length=50,
-        label='Email',
+        label='Username',
         required=True,
+    
         widget=TextInput({
-            'class': 'form-control'
+            'class': 'form-control',
+            
         })
     )
 
@@ -30,7 +32,8 @@ class LoginForm(Form):
         label='Password',
         required=True,
         widget=PasswordInput({
-            'class': 'form-control'
+            'class': 'form-control',
+           
         })
     )
 
@@ -74,11 +77,11 @@ class RegistrationForm(ModelForm):
             ]
         widgets = {
             'first_name': TextInput(attrs={'class': 'form-control','required':'True'}),
-            'last_name': TextInput(attrs={'class': 'form-control'}),
-            'email': EmailInput(attrs={'class': 'form-control'}),
-            'password': PasswordInput(attrs={'class': 'form-control'}),
-            'username': TextInput(attrs={'class': 'form-control'}),
-            'phone_number': NumberInput(attrs={'class': 'form-control'}),
+            'last_name': TextInput(attrs={'class': 'form-control','required':'True'}),
+            'email': EmailInput(attrs={'class': 'form-control','required':'True'}),
+            'password': PasswordInput(attrs={'class': 'form-control','required':'True'}),
+            'username': TextInput(attrs={'class': 'form-control','required':'True'}),
+            'phone_number': NumberInput(attrs={'class': 'form-control',}),
      
         }
     

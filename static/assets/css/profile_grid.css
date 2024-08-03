@@ -1,5 +1,6 @@
 *{
     margin: 0;
+    
 }
 
 .container-box {
@@ -11,6 +12,7 @@
     position: relative; 
     margin-right: 10px;
     /* Ensure relative positioning for absolute elements */
+    
 }
 .match{
     padding-bottom: 20px;
@@ -56,4 +58,7 @@
 /* Initially hide profiles beyond a certain number */
 .profile-card.hidden {
     display: none;
+}
+.card-title{
+    text-decoration: none;
 }

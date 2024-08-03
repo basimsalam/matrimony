@@ -73,7 +73,7 @@ def usernav(request):
 
 
 
-class HomeView(LoginRequiredMixin,TemplateView):
+class HomeView(TemplateView):
     template_name = 'user/home.html'
     
 class notification(LoginRequiredMixin,TemplateView):
@@ -141,34 +141,34 @@ class ProfileListView(LoginRequiredMixin, ListView):
             queryset = User.objects.filter(gender='Female')
         else:
             queryset = User.objects.filter(gender__in=['Male', 'Female'])
-        preference = get_object_or_404(Partner,user=self.request.user)
         
-        
-        
-        queryset = queryset.exclude(id=user.id).exclude(is_staff = True)
+        queryset = queryset.exclude(id=user.id).exclude(is_staff=True)
         queryset = queryset.select_related('family', 'partner').prefetch_related('address').all()
         
-        
         return queryset
-    
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
 
-        
         matches_for_you = self.get_queryset()
+        featured_profiles = User.objects.filter(usersubscription__active=True).exclude(id=user.id).exclude(is_staff=True)
 
-        featured_profiles = User.objects.filter(usersubscription__active=True).exclude(id=user.id)
-
-        
-        # location_matches = User.objects.filter(address__country=user.address.country).exclude(id=user.id)
+        if user.address.exists():
+            current_user_address = user.address.first()  # Get the first address (assuming each user has one address)
+            location_matches = User.objects.filter(
+                address__state=current_user_address.state,
+                address__country=current_user_address.country
+            ).exclude(id=user.id)
+        else:
+            location_matches = User.objects.none()
 
         context['matches_for_you'] = matches_for_you
         context['featured_profiles'] = featured_profiles
-        # context['location_matches'] = location_matches
+        context['location_matches'] = location_matches
 
         return context
+
 
 
 
@@ -269,8 +269,11 @@ def delete_friend_request(request, request_id):
 
 def received_requests(request):
     received_requests = FriendRequest.objects.filter(to_user=request.user, status='pending')
-    context ={
+    sent_requests = FriendRequest.objects.filter(from_user=request.user, status='pending')
+    
+    context = {
         'received_requests': received_requests,
+        'sent_requests': sent_requests,
     }
     return render(request, 'user/friend_req.html', context)
 

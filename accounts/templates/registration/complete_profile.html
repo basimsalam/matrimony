@@ -1,25 +1,37 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
+{% load static%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Form</title>
+    <title>Personal Details</title>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .profile-container {
-            box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/accounts/complete.css' %}">
+
 </head>
 <body>
-    <div class="container mt-5 profile-container">
-        <h2>Profile Form</h2>
+    <div class="container ">
+        <div class="image-container">
+            <img src="{% static 'assets/img/userimg/cpl3.jpg'%}" alt="Image">
+        </div>
+        
+        
+        
+        
+        <div class="login-container">
+        <ul class="progressbar">
+            <li class="active">Step 1</li>
+            <li>Step 2</li>
+            <li>Step 3</li>
+            <li>Step 4</li>
+            <li>Step 5</li>
+        </ul>
+
+
+        <h2 class="text-center">Personal Details</h2>
         <form action="{% url "accounts:complete_profile"%}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
@@ -62,7 +74,7 @@
             {{form.errors}}
         </form>
     </div>
-
+</div>
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

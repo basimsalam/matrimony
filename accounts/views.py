@@ -196,7 +196,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         user=self.request.user
         context['data'] = self.request.user
-        context['address'] = Address.objects.get(user=user)
+        context['addresses'] = Address.objects.filter(user=user)
         context['family'] = Family.objects.get(user = user)
         context['partner'] =Partner.objects.get(user = user)
         return context

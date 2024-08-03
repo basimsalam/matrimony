@@ -1,40 +1,18 @@
+
 {% extends 'shared/base.html' %}
 
 {% block content %}
-<style>
-   
-    .login-container {
-        background-color: #ffffff;
-        border-radius: 20px;
-        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-    }
-    .social-icons {
-        font-size: 24px;
-        margin-top: 20px;
-    }
-    .social-icons a {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        margin-right: 10px;
-        color: #333;
-        border-radius: 50%;
-        background-color: #f0f0f0;
-        transition: background-color 0.3s ease;
-    }
-    .social-icons a:hover {
-        background-color: #ddd;
-    }
-    .btn-login {
-        border-radius: 10px;
-    }
-</style>
+{%load static%}
+<title>Login Page</title>
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/accounts/login.css' %}">
 <div class="container-fluid">
-    <div class="col-sm-4 offset-sm-4 mt-5 login-container">
-        <h1 class="text-center">Login</h1>
+    <div class="image-container">
+        <img src="{% static 'assets/img/userimg/cpl3.jpg'%}" alt="Image">
+    </div>
+    <div class=" login-container">
+        <img src="{% static 'assets/img/userimg/logo1.jpg'%}" alt="Image">
+        <h1 class="text-center">Welcome Back</h1>
+        
         <form method="post">
             {% csrf_token %}
             {% include 'components/form_field.html' with field=form.username %}

@@ -1,6 +1,7 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
+{% load static%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,12 +9,25 @@
     <title>User Information</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/accounts/about.css' %}">
+
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="card">
+    <div class="container">
+        <div class="image-container">
+            <img src="{% static 'assets/img/userimg/cpl3.jpg'%}" alt="Image">
+        </div>
+        <div class="login-container">
+            <ul class="progressbar">
+                <li class="active">Step 1</li>
+                <li class="active">Step 2</li>
+                <li class="active" >Step 3</li>
+                <li class="active">Step 4</li>
+                <li class="active">Step 5</li>
+                <li class="active">Step 6</li>
+            </ul>
             <div class="card-header">
-                <h3>User Information</h3>
+                <h3 class="text-center">User Information</h3>
             </div>
             <div class="card-body">
                 <form method="post" action={%  url 'accounts:about_details' %}>
@@ -30,6 +44,7 @@
                     <div class="form-group">
                     {% include 'components/form_field.html' with field=form.snapchat %}
                 </div>
+                
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

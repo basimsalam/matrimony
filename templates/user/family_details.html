@@ -1,6 +1,7 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
+{% load static%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,25 +9,25 @@
     <title>Family Details Form</title>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .form-container {
-            box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            background-color: #ffffff;
-            border-radius: 8px;
-        }
-        .container-box {
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/accounts/family.css' %}">
+    
 </head>
 <body>
-    <div class="container mt-5 container-box">
-        <div class="form-container">
-            <h2 class="mb-4">Family Details</h2>
+    <div class="container ">
+        <div class="image-container">
+            <img src="{% static 'assets/img/userimg/cple1.jpg'%}" alt="Image">
+        </div>
+        
+        <div class="login-container">
+            <ul class="progressbar">
+                <li class="active">Step 1</li>
+                <li class="active">Step 2</li>
+                <li >Step 3</li>
+                <li>Step 4</li>
+                <li>Step 5</li>
+                <li>Step 6</li>
+            </ul>
+            <h2 class="mb-2 text-center mt-4">Family Details</h2>
             <form method="POST" action="{% url 'app:family_details'%}">
                 {% csrf_token %}
                 <div class="row">

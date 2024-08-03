@@ -19,6 +19,8 @@
     <div class="container mt-5">
         <!-- Section: Matches for You -->
         <div class="container-box">
+
+            
             <h2 class="match">Matches for You</h2>
             <div class="row" id="matches-for-you">
                 {% for p in profiles %}
@@ -47,7 +49,7 @@
         <div class="container-box">
             <h2 class="mb-4">Featured Profiles</h2>
             <div class="row" id="featured-profiles">
-                {% for p in profiles %}
+                {% for p in featured_profiles %}
                 <div class="col-lg-3 col-md-6 profile-card {% if forloop.counter > 4 %}hidden{% endif %}">
                     <a href="{% url 'app:detailed_profile' p.id %}">
                     <div class="card profile-card text-white bg-dark mb-3">
@@ -74,7 +76,7 @@
         <div class="container-box">
             <h2 class="mb-4">Location Matches</h2>
             <div class="row" id="location-matches">
-                {% for p in profiles %}
+                {% for p in location_matches %}
                 <div class="col-lg-3 col-md-6 profile-card {% if forloop.counter > 4 %}hidden{% endif %}">
                     <a href="{% url 'app:detailed_profile' p.id %}">
                     <div class="card profile-card text-white bg-dark mb-3">

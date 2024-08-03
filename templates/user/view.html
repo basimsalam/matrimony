@@ -109,9 +109,10 @@
                     <div class="edit-button">
                         <a href="{% url 'accounts:address_edit' %}" class="btn btn-primary">Edit Profile</a>
                     </div>
-                    <div class="row">
+                    {% for address in addresses %}
+                    <div class="row mb-3">
                         <div class="col-md-6">
-                            <p><strong>Address Line1:</strong>{{ address.address_line1 }}</p>
+                            <p><strong>Address Line1:</strong> {{ address.address_line1 }}</p>
                             <p><strong>Address Line2:</strong> {{ address.address_line2 }}</p>
                             <p><strong>City:</strong> {{ address.city }}</p>
                         </div>
@@ -121,7 +122,9 @@
                             <p><strong>Country:</strong> {{ address.country }}</p>
                         </div>
                     </div>
+                    {% endfor %}
                 </section>
+
 
                 <!-- Employment Details -->
                 <section id="employment-details" class="section-container">

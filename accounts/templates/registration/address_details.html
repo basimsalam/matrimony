@@ -2,7 +2,7 @@
 
 {% block content %}
 
-
+{% load static%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,17 +10,28 @@
     <title>Address Form</title>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/accounts/complete.css' %}">
 </head>
 <body>
-    <div class="container mt-5">
-        <h2 class="mb-4">Address Information</h2>
+    <div class="container ">
+        <div class="image-container">
+            <img src="{% static 'assets/img/userimg/cpl3.jpg'%}" alt="Image">
+        </div>
+        <div class="login-container ">
+            <ul class="progressbar">
+                <li class="active">Step 1</li>
+                <li class="active">Step 2</li>
+                <li >Step 3</li>
+                <li>Step 4</li>
+                <li>Step 5</li>
+                <li>Step 6</li>
+            </ul>
+        <h2 class="text-center mt-2">Address Information</h2>
         <form method='POST' action={% url 'accounts:address_details'%} enctype='multipart/form'>
             {% csrf_token %}
             <!-- Temporary Address Section -->
-            <div class="card mb-4">
-                <div class="card-header">
-                    Temporary Address
-                </div>
+            
+                
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
@@ -44,17 +55,16 @@
                     <div class="form-group">
                         {% include 'components/form_field.html' with field=form.country%}
                     </div>
-                </div>
-            </div>
 
             
 
             
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" >
                     Continue <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
+        </div>
         </form>
     </div>
 

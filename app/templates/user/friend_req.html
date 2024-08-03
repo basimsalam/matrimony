@@ -1,58 +1,79 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-<style>
-    .profile-photo {
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        margin-right: 10px;
-    }
-    .list-group-item {
-        margin-bottom: 10px; /* Add margin between each list item */
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add shadow effect */
-        padding: 10px; /* Add padding for better spacing */
-        border-radius: 10px /* Add border radius for rounded corners */
-    }
-    .container h2 {
-        font-style: italic;
-        font-weight: bold;
-        text-align:center;
-    }
-</style>
-<div class="container mt-4">
-    <h2>Friend Requests</h2>
-    <div class="container-sm">
-        {% if received_requests %}
-            <div class="list-group">
-                {% for request in received_requests %}
+{% load static%}
+<link rel="stylesheet" href="{% static 'assets/css/usercss/request.css' %}">
+
+<div class="container ">
+    <div class="flex-container">
+        <!-- Received Friend Requests Section -->
+        <div class="flex-item">
+            <h2>Received Requests</h2>
+            <div class="container-sm">
+                {% if received_requests %}
+                    <div class="list-group">
+                        {% for request in received_requests %}
+                        <div class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                {% if request.from_user.profile_photo %}
+                                <img src="{{ request.from_user.profile_photo.url }}" alt="{{ request.from_user.first_name }}'s profile picture" class="profile-photo">
+                                {% endif %}
+                                <p class="mb-0 ml-2 "><b>{{ request.from_user.username }}</b> has sent you a friend request.</p>
+                            </div>
+
+                            <!-- Button group -->
+                            <div class="btn-group mt-2">
+                                <form method="post" action="{% url 'app:accept_friend_request' request.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-success btn-sm">Accept</button>
+                                </form>
+                                <form method="post" action="{% url 'app:delete_friend_request' request.id %}" style="margin-left: 5px;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
                 <div class="list-group-item">
-                    <div class="d-flex align-items-center">
-                        {% if request.from_user.profile_photo %}
-                        <img src="{{ request.from_user.profile_photo.url }}" alt="{{ request.from_user.first_name }}'s profile picture" class="profile-photo">
-                        {% endif %}
-                        <p class="mb-0 ml-2"><b>{{ request.from_user.username }} </b>has sent you a friend request.</p>
-                    </div>
-                    
-                    <!-- Button group -->
-                    <div class="btn-group mt-2">
-                        <form method="post" action="{% url 'app:accept_friend_request' request.id %}">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-success btn-sm">Accept</button>
-                        </form>
-                        <form method="post" action="{% url 'app:delete_friend_request' request.id %}" style="margin-left: 5px;">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </div>
+                    <p>There are no friend requests for you now.</p>
                 </div>
-                {% endfor %}
+                {% endif %}
             </div>
-        {% else %}
-        <div class="list-group-item">
-            <p>There are no friend requests for you now.</p>
         </div>
-        {% endif %}
+
+        <!-- Sent Friend Requests Section -->
+        <div class="flex-item">
+            <h2>Sent Requests</h2>
+            <div class="container-sm">
+                {% if sent_requests %}
+                    <div class="list-group">
+                        {% for request in sent_requests %}
+                        <div class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                {% if request.to_user.profile_photo %}
+                                <img src="{{ request.to_user.profile_photo.url }}" alt="{{ request.to_user.first_name }}'s profile picture" class="profile-photo">
+                                {% endif %}
+                                <p class="mb-0 ml-2"><b>{{ request.to_user.username }}</b> - pending request.</p>
+                            </div>
+                            <!-- Optional cancel request button -->
+                            <div class="btn-group mt-2">
+                                <form method="post" action="{% url 'app:delete_friend_request' request.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-warning btn-sm">Cancel Request</button>
+                                </form>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                <div class="list-group-item">
+                    <p>You have not sent any friend requests.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock content %}
